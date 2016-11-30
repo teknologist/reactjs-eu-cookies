@@ -1,12 +1,12 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })(); // import './style/style.less';
-
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 require('babel-core/polyfill');
 
@@ -24,23 +24,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // import './style/style.less';
 
-var EuCookies = (function (_React$Component) {
+
+var EuCookies = function (_React$Component) {
 	_inherits(EuCookies, _React$Component);
 
 	function EuCookies(props) {
 		_classCallCheck(this, EuCookies);
 
-		var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(EuCookies).call(this, props));
+		var _this = _possibleConstructorReturn(this, (EuCookies.__proto__ || Object.getPrototypeOf(EuCookies)).call(this, props));
 
-		_this4.state = {
+		_this.state = {
 			show: true,
 			showHideEffect: false,
 			height: 0,
-			lang: _this4.getLanguage(props.lang)
+			lang: _this.getLanguage(props.lang),
+			link: props.link ? props.link : "http://www.aboutcookies.org/default.aspx?page=5"
+
 		};
-		return _this4;
+		return _this;
 	}
 
 	_createClass(EuCookies, [{
@@ -53,7 +56,7 @@ var EuCookies = (function (_React$Component) {
 			}
 
 			if (typeof _Lang2.default[lang] == "undefined") {
-				lang = "en";
+				lang = "fr";
 			}
 
 			return lang;
@@ -61,12 +64,12 @@ var EuCookies = (function (_React$Component) {
 	}, {
 		key: 'cookiesAccepted',
 		value: function cookiesAccepted() {
-			var _this = this;
+			var _this2 = this;
 
 			this.setState({ showHideEffect: true });
 			this.setHideToCookies();
 			setTimeout(function () {
-				return _this.setState({ show: false });
+				return _this2.setState({ show: false });
 			}, 800);
 		}
 	}, {
@@ -88,12 +91,10 @@ var EuCookies = (function (_React$Component) {
 				for (var _iterator = document.cookie.split('; ')[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 					var cookie = _step.value;
 
-					var _cookie$split = cookie.split("=");
-
-					var _cookie$split2 = _slicedToArray(_cookie$split, 2);
-
-					var name = _cookie$split2[0];
-					var value = _cookie$split2[1];
+					var _cookie$split = cookie.split("="),
+					    _cookie$split2 = _slicedToArray(_cookie$split, 2),
+					    name = _cookie$split2[0],
+					    value = _cookie$split2[1];
 
 					cookies[name] = decodeURIComponent(value);
 				}
@@ -117,14 +118,14 @@ var EuCookies = (function (_React$Component) {
 	}, {
 		key: 'onResizeWindow',
 		value: function onResizeWindow() {
-			var _this2 = this;
+			var _this3 = this;
 
 			if (window.resizeTimeOut != null) clearTimeout(window.resizeTimeOut);
 
 			window.resizeTimeOut = setTimeout(function () {
-				_this2.setState({ height: 0 });
+				_this3.setState({ height: 0 });
 				setTimeout(function () {
-					_this2.setState({ height: _react2.default.findDOMNode(_this2).offsetHeight });
+					_this3.setState({ height: _react2.default.findDOMNode(_this3).offsetHeight });
 				}, 100);
 			}, 400);
 		}
@@ -139,14 +140,14 @@ var EuCookies = (function (_React$Component) {
 	}, {
 		key: 'componentDidMount',
 		value: function componentDidMount() {
-			var _this3 = this;
+			var _this4 = this;
 
 			this.setState({ height: _react2.default.findDOMNode(this).offsetHeight });
 
 			window.resizeTimeOut = null;
 
 			window.onresize = function () {
-				return _this3.onResizeWindow.bind(_this3);
+				return _this4.onResizeWindow.bind(_this4);
 			};
 
 			//IE8 and older Fix
@@ -161,12 +162,7 @@ var EuCookies = (function (_React$Component) {
 		value: function render() {
 
 			if (!this.state.show) {
-				return _react2.default.createElement('span', {
-					__source: {
-						fileName: '..\\..\\..\\..\\..\\src\\EuCookies.jsx',
-						lineNumber: 96
-					}
-				});
+				return _react2.default.createElement('span', null);
 			}
 
 			var divClass = "eu-cookies";
@@ -178,36 +174,19 @@ var EuCookies = (function (_React$Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: divClass, style: height, __source: {
-						fileName: '..\\..\\..\\..\\..\\src\\EuCookies.jsx',
-						lineNumber: 107
-					}
-				},
+				{ className: divClass, style: height },
 				_react2.default.createElement(
 					'div',
-					{
-						__source: {
-							fileName: '..\\..\\..\\..\\..\\src\\EuCookies.jsx',
-							lineNumber: 108
-						}
-					},
+					null,
 					_Lang2.default[this.state.lang].text,
 					_react2.default.createElement(
 						'button',
-						{ onClick: this.cookiesAccepted.bind(this), __source: {
-								fileName: '..\\..\\..\\..\\..\\src\\EuCookies.jsx',
-								lineNumber: 110
-							}
-						},
+						{ onClick: this.cookiesAccepted.bind(this) },
 						_Lang2.default[this.state.lang].btn
 					),
 					_react2.default.createElement(
 						'a',
-						{ href: 'http://www.aboutcookies.org/default.aspx?page=5', target: '_blank', __source: {
-								fileName: '..\\..\\..\\..\\..\\src\\EuCookies.jsx',
-								lineNumber: 111
-							}
-						},
+						{ href: this.state.link, target: '_blank' },
 						_Lang2.default[this.state.lang].link
 					)
 				)
@@ -216,6 +195,6 @@ var EuCookies = (function (_React$Component) {
 	}]);
 
 	return EuCookies;
-})(_react2.default.Component);
+}(_react2.default.Component);
 
 exports.default = EuCookies;
